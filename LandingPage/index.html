@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html lang = "en"> 
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <script type = "text/javascript" src = "main.js"> </script>
+    <title> Landing Page</title>
+  </head>
+
+  
+  <body>
+    <div class="hero-image">
+      <div class="hero-text">
+        <h1 style="font-size:50px">Welcome</h1>
+        <h3>Select model files to upload</h3>
+        <form method="post" enctype="multipart/form-data">
+          <div>
+            <label for="image_uploads">Choose model to upload (.3dm)</label>
+            <div>
+              <input type="file" 
+              id="image_uploads" 
+              style="opacity:0" 
+              name="image_uploads" 
+              accept=".3dm" 
+              multiple/>
+              
+            </div>
+            
+          </div>
+          <div class="preview">
+            <p>No files currently selected for upload</p>
+          </div>
+          <div>
+            <button>Continue</button>
+          </div>
+        </form>
+        
+        <script>
+          const input = document.querySelector('input');
+          const preview = document.querySelector('.preview');
+                    
+          input.style.opacity = 0;
+
+          input.addEventListener('change', updateImageDisplay);
+
+          function updateImageDisplay() {
+            while(preview.firstChild) {
+              preview.removeChild(preview.firstChild);
+            }
+
+            const curFiles = input.files;
+            if(curFiles.length === 0) {
+              const para = document.createElement('p');
+              para.textContent = 'No files currently selected for upload';
+              preview.appendChild(para);
+            } else {
+              const list = document.createElement('ol');
+              preview.appendChild(list);
+
+              for(const file of curFiles) {
+                const listItem = document.createElement('li');
+                const para = document.createElement('p');
+
+                if(validFileType(file)) {
+                  para.textContent = `File name ${file.name}, file size ${returnFileSize(file.size)}.`;
+                  const image = document.createElement('img');
+                  image.src = URL.createObjectURL(file);
+
+                  listItem.appendChild(image);
+                  listItem.appendChild(para);
+                } else {
+                  para.textContent = `File name ${file.name}: Not a valid file type. Update your selection.`;
+                  listItem.appendChild(para);
+                }
+
+                list.appendChild(listItem);
+              }
+            }
+          }
+
+          // https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types
+          const fileTypes = [
+              'image/bmp',
+              'image/gif',
+              'image/jpeg',
+              'image/pjpeg',
+              'image/png',
+              'image/svg+xml',
+              'image/tiff',
+              'image/webp',
+              `image/x-icon`
+          ];
+
+          function validFileType(file) {
+            return fileTypes.includes(file.type);
+          }
+
+          function returnFileSize(number) {
+            if(number < 1024) {
+              return number + 'bytes';
+            } else if(number > 1024 && number < 1048576) {
+              return (number/1024).toFixed(1) + 'KB';
+            } else if(number > 1048576) {
+              return (number/1048576).toFixed(1) + 'MB';
+            }
+          }
+        </script>
+      </div>
+    </div>
+
+
+  </body>
+</html>
+
+   
+
+        
+
+    
+   <!-- <p>Page content..</p>
+    <p>Note that this technique will also make the image responsive: Resize the browser window to see the effect.</p>
+    
+    </body>
+    </html>
+ 
+<head>
+  <meta charset="utf-8">
+  <title> CSS-Test</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+  <h1> CSS-Test</h1>
+
+  <div id = "box-one">
+  <p> This is box one.</p>
+  </div>
+
+  <div id = "box-two">
+    <p> This is box two.</p>
+  </div>
+</body>
+</html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <canvas id="bg"> </canvas>
+    <script type="module" src="/main.js"></script>
+ 
+    <main>
+
+      <header>
+        <h1>Jeff Delaney</h1>
+        <p>🚀 Welcome to my website!</p>
+      </header>
+
+
+      <blockquote>
+        <p>I like making stuff and putting it on the internet</p>
+      </blockquote>
+
+      <section>
+        <h2>📜 Manifesto</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+
+      </section>
+
+      <section class="light">
+        <h2>👩🏽‍🚀 Projects</h2>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+
+        <h2>🏆 Accomplishments</h2>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+
+      </section>
+
+      <blockquote>
+        <p>The best way out is always through <br>-Robert Frost</p>
+      </blockquote>
+
+      <section class="left">
+        <h2>🌮 Work History</h2>
+
+        <h3>McDonalds</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+        <h3>Burger King</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+        <h3>Taco Bell</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+
+      </section>
+
+      <blockquote>
+        <p>Thanks for watching!</p>
+      </blockquote>
+
+
+    </main>
+    
+    <script type="module" src="/main.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  -->
+
+
+
+  </body>
+
+  
+</html>
